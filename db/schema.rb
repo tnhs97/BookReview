@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181230143053) do
+ActiveRecord::Schema.define(version: 20181231183611) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20181230143053) do
     t.string "book_img_content_type"
     t.integer "book_img_file_size"
     t.datetime "book_img_updated_at"
+    t.string "path_read"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -69,12 +70,7 @@ ActiveRecord::Schema.define(version: 20181230143053) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "comment_hierarchies", id: false, force: :cascade do |t|
-    t.integer "ancestor_id", null: false
-    t.integer "descendant_id", null: false
-    t.integer "generations", null: false
-    t.index ["ancestor_id", "descendant_id", "generations"], name: "comment_anc_desc_udx", unique: true
-    t.index ["descendant_id"], name: "comment_desc_idx"
+  create_table "comment_hierarchies", force: :cascade do |t|
   end
 
   create_table "comments", force: :cascade do |t|
@@ -83,6 +79,7 @@ ActiveRecord::Schema.define(version: 20181230143053) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "book_id"
+    t.integer "parent_id"
   end
 
   create_table "favorites", force: :cascade do |t|

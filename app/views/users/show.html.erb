@@ -125,9 +125,9 @@
                     </div>
                     <div class="pull-right" style="margin-left:10px;">0</div>
                 </div>
-            </div>          
-        </div>          
-        
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-sm-7">
                 <hr/>
@@ -166,11 +166,18 @@
         </div>
         </div>
         <div class="tab-pane fade in" id="tab2">
+            <% if @book != nil %>
              <% @book.each do |minh| %>
              <a href="/books/<%=minh.id %>">
               <%= image_tag minh.book_img.url(:book_index), class: "book" %>
               </a>
-   
+              <% @bookfavorite_search = Bookfavorite.where(:book_id => minh.id).first %>
+              <% if current_user.id == @bookfavorite_search.user_id %>
+              <%= link_to 'Delete',user_bookfavorite_path(@user.id,@bookfavorite_search.id), method: :delete, data: {confirm: "are you sure"}  %>
+              <% end %>
+              <% end %>
+            <% else %>
+            chua co sach
             <% end %>
         </div>
         <div class="tab-pane fade in" id="tab3">
@@ -178,5 +185,5 @@
         </div>
       </div>
     </div>
-    
+
     </div>

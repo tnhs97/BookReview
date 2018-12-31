@@ -1,32 +1,33 @@
 class CommentsController < ApplicationController
 	 protect_from_forgery with: :exception
-	 include SessionsHelper   
-    
+	 include SessionsHelper
+
     before_action :require_login
 		before_action :find_book
     before_action :find_comment,only: [ :destroy]
 
-    def new 
-       @comment = Comment.new 
+    def new
+       @comment = Comment.new
     end
 
     def create
       @comment = Comment.new(comment_params)
+			@comment.parent_id = params[:parent_id].to_i
       @comment.book_id = @book.id
       @comment.user_id = @current_user.id
        if @comment.save
-        redirect_to book_path(@book)
+        redirect_to book_path(@book,:anchor => @comment.id)
     end
    end
 
    def edit
    end
-   
+
    def destroy
      @comment.destroy
-     redirect_to book_path(@book)
-    end   
-    
+     redirect_to book_path(@book,:anchor => "wall")
+    end
+
     private
 
 		def comment_params
@@ -40,4 +41,3 @@ class CommentsController < ApplicationController
       @comment = Comment.find(params[:id])
     end
     end
-

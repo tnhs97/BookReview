@@ -25,6 +25,8 @@ gem 'activeadmin', '~> 1.2', '>= 1.2.1'
 gem 'devise', '~> 4.4', '>= 4.4.3'
 gem "mysql2", "~> 0.4.4"
 gem 'paperclip', '~> 4.3', '>= 4.3.6'
+gem "closure_tree"
+gem 'acts_as_tree', '~> 2.4'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

@@ -47,7 +47,9 @@
 							<%= f.button :submit, :class => "btn-custom2" %>
 
 						<% end %>
-
+						<br />
+					
+						<a class="btn btn-warning" style="color: white;" href="/books/<%= @book.id %>/reads" role="button">Đọc online</a>
 						<br />
 						<div class="product_meta">
 							<span class="posted_in">Categories:
@@ -83,6 +85,7 @@
 				</div>
 			</div>
 		</div>
+		
 		<div class="product__info__detailed">
 			<div class="pro_details_nav nav justify-content-start" role="tablist">
 				<a class="nav-item nav-link active" data-toggle="tab" href="#nav-review" role="tab">Reviews</a>

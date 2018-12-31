@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 root 'books#index'
 
   resources :books do
-
+  resources :reads
   resources :reviews
   resources :comments
   resources :bookfavorites
@@ -27,5 +27,6 @@ root 'books#index'
   resources :bookfavorites
   end
   resources :requires
+  
 
 end

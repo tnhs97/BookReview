@@ -76,23 +76,34 @@
 											<button class="btn btn-default btn-lg btn-link" style="font-size:23px;    color: white;">
 												<span class="glyphicon glyphicon-bell"></span>
 											</button>
-											<span class="badge badge-notify">3</span>
+                      <% @comment = Comment.where(:user_id => @current_user.id).first %>
+                      <% @comment1 = Comment.where(:parent_id => @comment.id).order("created_at DESC") %>
+                      <% if @comment1.count > 0 %>
+                      <% count_comment = @comment1.count %>
+                      <% else %>
+                      <% count_comment = 0 %>
+                      <% end %>
+											<span class="badge badge-notify"><%= count_comment %></span>
 											<div class="megamenu mega02">
 												<ul class="item item01 ">
-													<li class="title">USER</li>
-													<li>
+													<li class="title">Notification</li>
+                      <% @comment1.all.each do |comment_reply| %>
+                          <li>
 														<div class="media">
 															<div class="media-left">
-																<a href="#">
-																ABC
+																<a href="<%= user_path(comment_reply.user)%>">
+                                <img class="profile-images1" class="media-object" src="<%= comment_reply.user.user_img.url(:user_index) %>" alt="...">
 																</a>
 															</div>
 															<div class="media-body">
-																<h4 class="media-heading">XYZ</h4>
-																MLH
+																<h4 class="media-heading"><%=comment_reply.user.name %></h4>
+                                <a href="<%= book_path(comment_reply.book,:anchor => comment_reply.id)%>">
+                                <%= comment_reply.comment %>
+                                </a>
 															</div>
 														</div>
 													</li>
+                          <% end %>
 												</ul>
 											</div>
 										</li>

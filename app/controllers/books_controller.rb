@@ -24,6 +24,7 @@ class BooksController < ApplicationController
       @count = Comment.all.count
       @randomBook = Book.where(:category_id => @book.category_id).order("created_at DESC").sample(3)
       @number = 0
+      @randomreview
       if @book.reviews.blank?
       @average_review = 0
     else

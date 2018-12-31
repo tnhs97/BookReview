@@ -172,8 +172,10 @@
               <%= image_tag minh.book_img.url(:book_index), class: "book" %>
               </a>
               <% @bookfavorite_search = Bookfavorite.where(:book_id => minh.id).first %>
+              <% if logged_in? %>
               <% if current_user.id == @bookfavorite_search.user_id %>
               <%= link_to 'Delete',user_bookfavorite_path(@user.id,@bookfavorite_search.id), method: :delete, data: {confirm: "are you sure"}  %>
+              <% end %>
               <% end %>
               <% end %>
             <% else %>

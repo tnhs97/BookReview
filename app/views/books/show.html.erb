@@ -190,8 +190,8 @@
 
 					<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
 						<div class="product__thumb">
-							<a class="first__img" href="single-product.html">	<%= image_tag random.book_img.url(:book_index), class: "book" %></a>
-							<a class="second__img animation1" href="single-product.html"><%= image_tag random.book_img.url(:book_index), class: "book" %></a>
+							<a class="first__img" href="/books/<%=random.id %>">	<%= image_tag random.book_img.url(:book_index), class: "book" %></a>
+							<a class="second__img animation1" href="/books/<%=random.id%>"><%= image_tag random.book_img.url(:book_index), class: "book" %></a>
 							<div class="hot__box color--2">
 								<span class="hot-label">HOT</span>
 							</div>
@@ -212,13 +212,26 @@
 									</ul>
 								</div>
 							</div>
+							<% @number = 0 %>
+							<% if random.reviews.blank? %>
+							<% @randomreview = 0 %>
+							<% else %>
+						<% @randomreview = random.reviews.average(:rating).round(2) %>
+						  <% end %>
 							<div class="product__hover--content">
 								<ul class="rating d-flex">
-									<li class="on"><i class="fa fa-star-o"></i></li>
-									<li class="on"><i class="fa fa-star-o"></i></li>
-									<li class="on"><i class="fa fa-star-o"></i></li>
-									<li><i class="fa fa-star-o"></i></li>
-									<li><i class="fa fa-star-o"></i></li>
+									<% while @number < @randomreview.to_i %>
+									<li><i class="zmd-fw zmdi zmdi-star"></i></li>
+									<% @number += 1 %>
+									<% end %>
+									<% if @randomreview - @randomreview.to_i > 0 %>
+									<li class="off"><i class="zmdi zmdi-star-half"></i></li>
+									<% end %>
+									<% @number = 0 %>
+									<% while @number < (5 - @randomreview).to_i %>
+									<li class="off"><i class="zmdi zmdi-star-outline"></i></li>
+									<% @number += 1 %>
+									<% end %>
 								</ul>
 							</div>
 						</div>

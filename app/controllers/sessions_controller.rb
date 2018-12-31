@@ -15,11 +15,11 @@ class SessionsController < ApplicationController
         render :new
       end
   end
-  
+
   def log_out
       session.delete :user_id
   end
-  
+
   def destroy
       log_out
       flash[:success] = "Bạn đã đăng xuất !"

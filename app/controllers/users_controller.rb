@@ -3,9 +3,9 @@ class UsersController < ApplicationController
  include SessionsHelper
  include BookfavoritesHelper
 
- before_action :require_login, only:[:index, :show, :edit, :update]
+ before_action :require_login, only:[:edit, :update]
  before_action :find_user_by_id, only:[:show, :edit, :update, :destroy]
-
+ before_action :exit_log_in, only:[:show]
   def index
 
   end
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   def show
     check @user
     @bookfavorite = Bookfavorite.where(:id => @id).first
-    if !@bookfavorite.nil? 
+    if !@bookfavorite.nil?
     @book_id = @bookfavorite.book_id
     @book = Book.where(:id => @book_id).order("created_at DESC")
     end

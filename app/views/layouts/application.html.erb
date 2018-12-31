@@ -76,6 +76,7 @@
 											<button class="btn btn-default btn-lg btn-link" style="font-size:23px;    color: white;">
 												<span class="glyphicon glyphicon-bell"></span>
 											</button>
+                      <% @comment = Comment.where(:user_id => @current_user.id).order(("created_at DESC")) %>
 											<span class="badge badge-notify">3</span>
 											<div class="megamenu mega02">
 												<ul class="item item01 ">

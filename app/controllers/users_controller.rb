@@ -7,7 +7,7 @@ class UsersController < ApplicationController
  before_action :find_user_by_id, only:[:show, :edit, :update, :destroy]
  before_action :exit_log_in, only:[:show]
   def index
-
+    @users = User.all.order("created_at DESC")
   end
 
   def new

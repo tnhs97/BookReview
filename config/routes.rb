@@ -24,9 +24,10 @@ root 'books#index'
 
 
   resources :users do
+  resources :follow1s      
   resources :bookfavorites
   end
   resources :requires
-  
+
 
 end

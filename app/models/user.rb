@@ -10,6 +10,7 @@ class User < ApplicationRecord
     has_many :reviews
     has_many :comments
     has_many :bookfavorites
+		has_many :follow1s
 	has_secure_password
 
 	has_attached_file :user_img, :styles => { :user_index => "250x350>", :user_show => "325x475>" }, :default_url => "default.png"

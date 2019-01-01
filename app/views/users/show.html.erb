@@ -13,6 +13,11 @@
 
         </div>
     </div>
+    <%= simple_form_for([@user, @user.follow1s.build],remote: true) do |f| %>
+      <%= f.button :submit, :class => "btn-custom2" %>
+
+    <% end %>
+
     <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
         <div class="btn-group" role="group">
             <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
@@ -183,7 +188,26 @@
             <% end %>
         </div>
         <div class="tab-pane fade in" id="tab3">
-          <h3>This is tab 3</h3>
+          <h3>Danh sách user đang theo dõi</h3>
+          <% @user_follow = @user.follow1s.all %>
+          <% @user_follow.all.each do |user| %>
+          <% user_follow1 = User.find(user.follow_user_id) %>
+          <a href="<%= user_path(user_follow1)%>">
+          <img alt="" src="<%= user_follow1.user_img.url(:user_index) %>">
+          </a>
+          <% if current_user == @user %>
+          <%= link_to 'Delete',user_follow1_path(@user.id,user.id), method: :delete, data: {confirm: "are you sure"}  %>
+          <% end %>     
+          <% end %>
+          <h3>Danh sách user theo dõi bạn</h3>
+          <% user_follow1 = Follow1.where(:follow_user_id => @user.id).order("created_at DESC") %>
+          <% user_follow1.all.each do |user| %>
+          <% user_follow2 = User.find(user.user_id) %>
+          <a href="<%= user_path(user_follow2)%>">
+          <img alt="" src="<%= user_follow2.user_img.url(:user_index) %>">
+          </a>
+          <% end %>
+
         </div>
       </div>
     </div>
